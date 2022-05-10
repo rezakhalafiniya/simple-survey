@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $answer_text
  * @property string $value
  * @property Question $question
+ * @property Result[] $results
  *
  * @property Timestamp $created_at
  * @property Timestamp $updated_at
@@ -40,7 +41,28 @@ class Answer extends Model
         'created_at' => 'datetime',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function question(){
         return $this->belongsTo(Question::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function results(){
+        return $this->hasMany(Result::class);
+    }
+
+    /**
+     * Add events for the model here
+     */
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($answer) {
+            $answer->results()->delete();
+        });
     }
 }

@@ -44,14 +44,31 @@ class Question extends Model
         'created_at' => 'datetime',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function survey()
     {
         return $this->belongsTo(Survey::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function answers()
     {
         return $this->hasMany(Answer::class);
+    }
+
+    /**
+     * Add events for the model here
+     */
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($question) {
+            $question->answers()->delete();
+        });
     }
 
 }

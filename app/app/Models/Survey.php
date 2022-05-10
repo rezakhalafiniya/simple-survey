@@ -31,6 +31,7 @@ class Survey extends Model
     protected $fillable = [
         'title',
         'description',
+        'slug'
     ];
 
     /**
@@ -43,13 +44,30 @@ class Survey extends Model
         'created_at' => 'datetime',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function questions()
     {
         return $this->hasMany(Question::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function results()
     {
         return $this->hasMany(Result::class);
+    }
+
+    /**
+     * Add events for the model here
+     */
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($survey) {
+             $survey->questions()->delete();
+        });
     }
 }

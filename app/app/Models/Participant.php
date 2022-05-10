@@ -36,4 +36,22 @@ class Participant extends Model
         'updated_at' => 'datetime',
         'created_at' => 'datetime',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function results(){
+        return $this->hasMany(Result::class);
+    }
+
+    /**
+     * Add events for the model here
+     */
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($participant) {
+            $participant->results()->delete();
+        });
+    }
 }
