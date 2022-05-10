@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $title
  * @property string $description
+ * @property string $slug
  * @property Question[] $questions
  * @property Result[] $results
  *

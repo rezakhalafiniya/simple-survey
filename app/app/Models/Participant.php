@@ -7,9 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property string $nickname
- * @property int $participant_id
+ * @property int $id
  *
- * @property Survey[] $surveys
  * @property Result[] $results
  *
  * Class Participant
@@ -26,7 +25,6 @@ class Participant extends Model
      */
     protected $fillable = [
         'nickname',
-        'participant_id',
     ];
 
     /**
