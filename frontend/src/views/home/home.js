@@ -1,8 +1,8 @@
-import HelloWorld from "@/components/HelloWorld.vue";
+import TopNav from "@/components/topNav/TopNav";
 
 export default {
     name: "Home",
     components: {
-        HelloWorld,
+        TopNav,
     },
 };
