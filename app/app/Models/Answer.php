@@ -29,6 +29,7 @@ class Answer extends Model
     protected $fillable = [
         'answer_text',
         'value',
+        'question_id'
     ];
 
     /**

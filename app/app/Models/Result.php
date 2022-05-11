@@ -29,6 +29,9 @@ class Result extends Model
      */
     protected $fillable = [
         'participant_id',
+        'answer_id',
+        'question_id',
+        'survey_id',
     ];
 
     /**
@@ -41,21 +44,33 @@ class Result extends Model
         'created_at' => 'datetime',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function answer()
     {
         return $this->belongsTo(Answer::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function question()
     {
         return $this->belongsTo(Question::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function participant()
     {
         return $this->belongsTo(Participant::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function survey()
     {
         return $this->belongsTo(Survey::class);
