@@ -9,4 +9,7 @@ export default {
         Introduction,
         Surveys
     },
+    mounted() {
+        document.title = 'Home'
+    }
 };
