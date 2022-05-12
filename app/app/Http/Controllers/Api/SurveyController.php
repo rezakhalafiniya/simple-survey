@@ -25,7 +25,7 @@ class SurveyController extends Controller
         $validator = Validator::make($request->all(),[
             'title' => 'required',
             'description' => 'required',
-            'slug' => 'required',
+            'slug' => 'required|unique:surveys',
         ]);
         if ($validator->fails()){
             return \response($validator->errors(), Response::HTTP_BAD_REQUEST);
@@ -48,7 +48,7 @@ class SurveyController extends Controller
         $validator = Validator::make($request->all(),[
             'title' => 'required',
             'description' => 'required',
-            'slug' => 'required|unique:surveys',
+            'slug' => 'required',
         ]);
         if ($validator->fails()){
             return \response($validator->errors(),Response::HTTP_BAD_REQUEST);
