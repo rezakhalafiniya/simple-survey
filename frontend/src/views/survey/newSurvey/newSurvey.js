@@ -1,30 +1,15 @@
-import {mapActions, mapGetters} from "vuex";
 import TopNav from "@/components/topNav/TopNav";
+import SurveyForm from "@/components/forms/survey/SurveyForm";
+import QuestionForm from "@/components/forms/question/questionForm";
 
 export default {
     name: "NewSurvey",
+    components: {
+        TopNav,
+        SurveyForm,
+        QuestionForm
+    },
     mounted() {
-        document.title = 'Survey'
-        this.getSurvey({id: this.$route.params.slug})
-
+        document.title = 'New Survey'
     },
-    watch: {
-        $route(to, from) {
-            console.log(to, from)
-            // react to route changes...
-        }
-    },
-    computed:{
-        ...mapGetters({
-            survey: 'survey/survey'
-        })
-    },
-    methods: {
-        ...mapActions({
-            getSurvey: 'survey/getSurvey'
-        })
-    },
-    components:{
-        TopNav
-    }
 };

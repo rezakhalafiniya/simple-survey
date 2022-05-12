@@ -1,0 +1,51 @@
+<template>
+    <div>
+        <b-form ref="form" @submit.stop.prevent="saveSurvey">
+            <b-form-group
+                label="Title"
+                label-for="title-input"
+                invalid-feedback="Title is required"
+                type="text"
+            >
+                <b-form-input
+                    id="title-input"
+                    v-model="form.title"
+                    required
+                ></b-form-input>
+            </b-form-group>
+            <b-form-group
+                label="Description"
+                label-for="description-input"
+                invalid-feedback="Description is required"
+                type="text"
+            >
+                <b-form-input
+                    id="description-input"
+                    v-model="form.description"
+                    required
+                ></b-form-input>
+            </b-form-group>
+            <b-form-group
+                label="Slug"
+                label-for="slug-input"
+                invalid-feedback="Slug is required"
+                type="text"
+            >
+                <b-form-input
+                    id="slug-input"
+                    v-model="form.slug"
+                    required
+                ></b-form-input>
+            </b-form-group>
+            <b-form-group>
+                <b-button type="submit" variant="primary">Save</b-button>
+            </b-form-group>
+        </b-form>
+        <b-btn @click.stop.prevent="addQuestionComponent" v-if="surveyId">Add Question</b-btn>
+        <template v-for="(question,indx) in questions" >
+            <QuestionForm :key="indx" :surveyId="question.survey_id" :question-info="question"/>
+        </template>
+
+    </div>
+</template>
+<script src="./surveyForm.js"></script>

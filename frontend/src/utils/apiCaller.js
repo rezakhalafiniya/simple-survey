@@ -3,7 +3,10 @@ import axios from 'axios'
 const apiUrl = 'http://localhost:888/api/'
 
 const apiCaller = {
-    fetch: async (endpoint, formdata) => {
+    fetch: async (endpoint, formdata, id) => {
+        if (id){
+            endpoint = endpoint + '/'+id
+        }
         if (formdata) {
             try {
                 return await axios.post(
@@ -30,5 +33,15 @@ const apiCaller = {
             return error
         }
     },
+    delete: async (endpoint,id) => {
+        try {
+            return await axios.delete(
+                apiUrl + endpoint + '/' + id,
+                // { withCredentials: true }
+            )
+        } catch (error) {
+            return error
+        }
+    }
 }
 export default apiCaller

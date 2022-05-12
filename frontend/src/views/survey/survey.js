@@ -1,8 +1,18 @@
 import {mapActions, mapGetters} from "vuex";
 import TopNav from "@/components/topNav/TopNav";
+import SurveyForm from "@/components/forms/survey/SurveyForm"
 
 export default {
     name: "Survey",
+    data() {
+        return {
+            showEdit : false
+        }
+    },
+    components: {
+        TopNav,
+        SurveyForm
+    },
     mounted() {
         document.title = 'Survey'
         this.getSurvey({id: this.$route.params.slug})
@@ -14,7 +24,7 @@ export default {
             // react to route changes...
         }
     },
-    computed:{
+    computed: {
         ...mapGetters({
             survey: 'survey/survey'
         })
@@ -23,8 +33,5 @@ export default {
         ...mapActions({
             getSurvey: 'survey/getSurvey'
         })
-    },
-    components:{
-        TopNav
     }
 };

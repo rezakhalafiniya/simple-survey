@@ -2,7 +2,8 @@
     <div class="survey">
         <TopNav/>
         <div>
-            <b-card :title="survey.title" :sub-title="survey.slug">
+            <b-btn @click.stop.prevent="showEdit= !showEdit">Edit</b-btn>
+            <b-card v-if="!showEdit" :title="survey.title" :sub-title="survey.slug">
                 <b-card-text>
                     {{ survey.description}}
                 </b-card-text>
@@ -16,6 +17,7 @@
                     </b-card>
                 </div>
             </b-card>
+            <SurveyForm v-if="showEdit" :surveyInfo="survey"/>
             <b-btn>submit</b-btn>
         </div>
     </div>
