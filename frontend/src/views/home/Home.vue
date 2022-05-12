@@ -1,8 +1,10 @@
 <template>
     <div class="home">
         <TopNav/>
-        <Introduction/>
-        <Surveys/>
+        <b-container>
+            <Introduction/>
+            <Surveys/>
+        </b-container>
     </div>
 </template>
 <script src="./home.js"></script>

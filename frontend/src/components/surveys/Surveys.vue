@@ -9,7 +9,7 @@
                 {{ survey.description }}
             </b-card-text>
 
-            <b-button :href="'survey/'+survey.slug" variant="primary">Start the Survey</b-button>
+            <b-button :href="'survey/'+survey.id" variant="primary">Start the Survey</b-button>
         </b-card>
     </div>
 </template>
