@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
@@ -30,8 +31,9 @@ class UserController extends Controller
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response(['credential check failed'], Response::HTTP_UNAUTHORIZED);
         }
+        $token = $user->createToken($user->email)->plainTextToken;
 
-        return $user->createToken($user->email)->plainTextToken;
+        return \response(['user' => $user, 'token' => $token]);
     }
 
     public function register(Request $request)
@@ -39,7 +41,7 @@ class UserController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'email' => 'required|email',
+                'email' => 'required|unique:users|email',
                 'password' => 'required',
                 'name' => 'required',
             ]
@@ -47,12 +49,17 @@ class UserController extends Controller
         if ($validator->fails()) {
             return \response($validator->errors(), Response::HTTP_BAD_REQUEST);
         }
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->save();
-        return \response($user);
+        try{
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->save();
+            $token = $user->createToken($user->email)->plainTextToken;
+        }catch (QueryException $exception){
+            return \response(['message' => 'User not created'], Response::HTTP_BAD_REQUEST);
+        }
+        return \response(['user' => $user, 'token' => $token]);
     }
 
 }
