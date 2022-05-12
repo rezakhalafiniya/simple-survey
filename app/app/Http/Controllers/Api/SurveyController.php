@@ -74,7 +74,7 @@ class SurveyController extends Controller
 
         }
 
-        return \response(['Deleted'],Response::HTTP_LOOP_DETECTED);
+        return \response(['Deleted'],Response::HTTP_NO_CONTENT);
 
     }
 
