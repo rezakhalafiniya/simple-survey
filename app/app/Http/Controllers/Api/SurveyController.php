@@ -15,7 +15,10 @@ class SurveyController extends Controller
 {
 
     public function index(){
-        return response(Survey::query()->with('questions')->get()->all());
+        return response(Survey::query()
+                            ->with('questions')
+                            ->with('questions.answers')
+                            ->get()->all());
     }
 
     public function store(Request $request){
@@ -34,7 +37,10 @@ class SurveyController extends Controller
     }
 
     public function show($id){
-        return response(Survey::query()->with('questions')->findOrFail($id));
+        return response(Survey::query()
+                            ->with('questions')
+                            ->with('questions.answers')
+                            ->findOrFail($id));
     }
 
     public function update(Request $request, $id){
