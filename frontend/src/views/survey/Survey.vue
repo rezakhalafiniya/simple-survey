@@ -2,7 +2,7 @@
     <div class="survey">
         <TopNav/>
         <div>
-            <b-btn @click.stop.prevent="showEdit= !showEdit">Edit</b-btn>
+            <b-btn @click.stop.prevent="showEdit= !showEdit" v-if="user.email">Edit</b-btn>
             <SurveyComponent v-if="!showEdit" />
             <SurveyForm v-if="showEdit" :survey-info="survey" />
         </div>

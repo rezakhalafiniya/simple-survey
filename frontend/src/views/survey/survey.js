@@ -28,12 +28,13 @@ export default {
     },
     computed: {
         ...mapGetters({
-            survey: 'survey/survey'
+            survey: 'survey/survey',
+            user: 'auth/getUser'
         })
     },
     methods: {
         ...mapActions({
-            getSurvey: 'survey/getSurvey'
+            getSurvey: 'survey/getSurvey',
         })
     }
 };

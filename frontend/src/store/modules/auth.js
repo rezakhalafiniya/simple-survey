@@ -1,5 +1,6 @@
 import INITIAL_STATE from '../initialStates/userState'
 import apiCaller from "@/utils/apiCaller"
+import router from "@/router";
 
 export default {
     namespaced: true,
@@ -56,6 +57,7 @@ export default {
             commit("setUser",{payload : {name:null,email:null,id:null}})
             localStorage.removeItem('user')
             localStorage.removeItem('token')
+            router.push('/')
         },
         setUser({commit}){
             if (localStorage.user){
