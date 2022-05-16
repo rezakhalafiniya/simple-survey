@@ -52,6 +52,10 @@ export default {
         if (Object.keys(this.questionInfo).length !== 0){
             this.questionId = this.questionInfo.id
             this.form = this.questionInfo
-            this.answers = this.questionInfo.answers
+            if (this.questionInfo.answers){
+                this.answers = this.questionInfo.answers
+            }else{
+                this.answers = []
+            }
         }
     }}

@@ -19,7 +19,7 @@
             </b-form-group>
             <b-btn @click.stop.prevent="addAnswerComponent" v-if="questionId">Add Answer Option</b-btn>
             <template v-for="(answer,indx) in answers" >
-                <AnswerForm :key="indx" :questionId="question.id" :answer-info="answer"/>
+                <AnswerForm :key="indx" :questionId="questionId" :answer-info="answer"/>
             </template>
         </b-form>
     </div>

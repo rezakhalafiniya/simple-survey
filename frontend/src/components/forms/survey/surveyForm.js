@@ -42,7 +42,7 @@ export default {
         })
     },
     mounted() {
-        if (Object.keys(this.surveyInfo).length !== 0){
+        if (this.surveyInfo && Object.keys(this.surveyInfo).length !== 0){
             this.surveyId = this.surveyInfo.id
             this.form = this.surveyInfo
             this.questions = this.surveyInfo.questions
