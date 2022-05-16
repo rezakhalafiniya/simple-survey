@@ -1,6 +1,7 @@
 import {mapActions, mapGetters} from "vuex";
 import TopNav from "@/components/topNav/TopNav";
 import SurveyForm from "@/components/forms/survey/SurveyForm"
+import SurveyComponent from "@/components/survey/Survey"
 
 export default {
     name: "Survey",
@@ -11,7 +12,8 @@ export default {
     },
     components: {
         TopNav,
-        SurveyForm
+        SurveyForm,
+        SurveyComponent
     },
     mounted() {
         document.title = 'Survey'
