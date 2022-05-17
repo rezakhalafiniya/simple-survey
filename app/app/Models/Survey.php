@@ -61,6 +61,14 @@ class Survey extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rules()
+    {
+        return $this->hasMany(Rule::class);
+    }
+
+    /**
      * Add events for the model here
      */
     public static function boot() {

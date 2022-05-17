@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AnswerController;
 use App\Http\Controllers\Api\ParticipantController;
 use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\ResultController;
+use App\Http\Controllers\Api\RuleController;
 use App\Http\Controllers\Api\SurveyController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -35,5 +36,6 @@ Route::resources(
         'participant' => ParticipantController::class,
         'answer' => AnswerController::class,
         'result' => ResultController::class,
+        'rule' => RuleController::class,
     ]
 );

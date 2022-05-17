@@ -40,6 +40,7 @@ class SurveyController extends Controller
         return response(Survey::query()
                             ->with('questions')
                             ->with('questions.answers')
+                            ->with('rules')
                             ->findOrFail($id));
     }
 
