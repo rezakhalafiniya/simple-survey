@@ -7,13 +7,14 @@ export default {
         QuestionForm
     },
     props :{
-        surveyInfo: {}
+        surveyInfo: {},
     },
     data: () => {
         return{
             form: {},
             questions: [],
-            surveyId: null
+            surveyId: null,
+            tabIndex: 0,
         }
     },
     methods: {

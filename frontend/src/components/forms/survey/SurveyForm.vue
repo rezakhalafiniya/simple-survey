@@ -42,9 +42,14 @@
             </b-form-group>
         </b-form>
         <b-btn @click.stop.prevent="addQuestionComponent" v-if="surveyId">Add Question</b-btn>
-        <template v-for="(question,indx) in questions" >
-            <QuestionForm :key="indx" :surveyId="question.survey_id" :question-info="question"/>
-        </template>
+        <b-tabs card v-model="tabIndex">
+            <template v-for="(question,indx) in questions" >
+                <b-tab :key="indx" :title="'Question '+ (indx+1)" >
+                    <QuestionForm :key="indx" :surveyId="question.survey_id" :question-info="question"/>
+                </b-tab>
+            </template>
+        </b-tabs>
+
 
     </div>
 </template>
