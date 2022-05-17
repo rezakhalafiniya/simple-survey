@@ -49,6 +49,8 @@
                 </b-tab>
             </template>
         </b-tabs>
+        <b-btn @click.stop.prevent="addRuleComponent" v-if="surveyId">Add Rule</b-btn>
+
         <b-tabs card v-model="tabIndexRule">
             <template v-for="(rule,indx) in rules" >
                 <b-tab :key="indx" :title="'Rule '+ (indx+1)" >
