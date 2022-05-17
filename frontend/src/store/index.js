@@ -4,6 +4,8 @@ import survey from './modules/survey';
 import question from './modules/question';
 import answer from './modules/answer';
 import auth from './modules/auth';
+import result from './modules/result';
+import participant from './modules/participant';
 
 Vue.use(Vuex);
 
@@ -15,6 +17,8 @@ export default new Vuex.Store({
     survey,
     auth,
     question,
-    answer
+    answer,
+    result,
+    participant,
   },
 });

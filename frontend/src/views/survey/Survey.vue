@@ -1,6 +1,7 @@
 <template>
     <div class="survey">
         <TopNav/>
+        <Participant></Participant>
         <div>
             <b-btn @click.stop.prevent="showEdit= !showEdit" v-if="user.email">Edit</b-btn>
             <SurveyComponent v-if="!showEdit" />

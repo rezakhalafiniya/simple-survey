@@ -54,7 +54,7 @@ export default {
                 formData.append('question_id', payload.question_id)
                 apiCaller.fetch('answer', formData).then(response => {
                     if (response.status === 201) {
-                        commit('setAnswers', {payload: response.data})
+                        commit('setAnswer', {payload: response.data})
                         resolve(response.data)
                     } else {
                         reject('response?.response?.data?.error')

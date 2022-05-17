@@ -21,8 +21,8 @@ export default {
         }),
         saveAnswer(){
             this.form.question_id = this.questionId
-            if (this.answer.id){
-                this.updateAnswer({payload: this.form, id: this.answer.id})
+            if (this.answerId){
+                this.updateAnswer({payload: this.form, id: this.answerId})
             }else {
                 this.createAnswer({payload: this.form}).then((data)=>{
                     this.answerId = data.id
