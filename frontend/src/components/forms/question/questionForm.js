@@ -14,7 +14,8 @@ export default {
         return {
             form: {},
             answers: [],
-            questionId:null
+            questionId:null,
+            tabIndex:0,
         }
     },
     methods: {

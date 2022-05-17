@@ -18,9 +18,13 @@
                 <b-button @click.prevent.stop="doDelete" variant="danger">Delete</b-button>
             </b-form-group>
             <b-btn @click.stop.prevent="addAnswerComponent" v-if="questionId">Add Answer Option</b-btn>
-            <template v-for="(answer,indx) in answers" >
-                <AnswerForm :key="indx" :questionId="questionId" :answer-info="answer"/>
-            </template>
+            <b-tabs card v-model="tabIndex">
+                <template v-for="(answer,indx) in answers"  >
+                    <b-tab :key="indx" :title="'Answer '+ (indx+1)" >
+                        <AnswerForm :key="indx" :questionId="questionId" :answer-info="answer"/>
+                    </b-tab>
+                </template>
+            </b-tabs>
         </b-form>
     </div>
 </template>
