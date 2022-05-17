@@ -35,6 +35,7 @@ export default {
         },
 
         goNext() {
+            this.participant =  JSON.parse(localStorage.participant)
             if (!this.survey.questions[this.tabIndex].selectedAnswerId) {
                 this.$bvToast.toast(`Please Answer The Question First`, {
                     title: 'Question Not Answered',
