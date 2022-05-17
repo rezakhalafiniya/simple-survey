@@ -26,7 +26,7 @@ export default {
         saveQuestion() {
             this.form.survey_id = this.surveyId
             if (this.questionId){
-                this.updateQuestion({payload: this.form, id: this.question.id})
+                this.updateQuestion({payload: this.form, id: this.questionId})
             }else{
                 this.createQuestion({payload: this.form}).then((data)=>{
                     this.questionId = data.id
