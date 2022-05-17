@@ -23,7 +23,7 @@ class ParticipantController extends Controller
 
     public function store(Request $request){
         $validator = Validator::make($request->all(),[
-            'nickname' => 'required',
+            'nickname' => 'required|unique:participants',
         ]);
         if ($validator->fails()){
             return \response($validator->errors(), Response::HTTP_BAD_REQUEST);
