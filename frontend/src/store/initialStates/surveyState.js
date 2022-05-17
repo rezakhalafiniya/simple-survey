@@ -6,6 +6,7 @@ const INITIAL_STATE = {
         description: null,
         slug: null,
         questions: [],
+        rules: [],
         results: [],
     },
     surveys:[]

@@ -49,6 +49,13 @@
                 </b-tab>
             </template>
         </b-tabs>
+        <b-tabs card v-model="tabIndexRule">
+            <template v-for="(rule,indx) in rules" >
+                <b-tab :key="indx" :title="'Rule '+ (indx+1)" >
+                    <RuleForm :key="indx" :surveyId="rule.survey_id" :rule-info="rule"/>
+                </b-tab>
+            </template>
+        </b-tabs>
         <b-btn @click.stop.prevent="toggleShowEdit">Close Edit</b-btn>
     </div>
 </template>

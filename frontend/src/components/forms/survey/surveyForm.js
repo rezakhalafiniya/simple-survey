@@ -1,10 +1,12 @@
 import QuestionForm from "@/components/forms/question/QuestionForm"
+import RuleForm from "@/components/forms/rule/RuleForm"
 import {mapActions, mapGetters} from "vuex";
 
 export default {
     name: "surveyForm",
     components: {
-        QuestionForm
+        QuestionForm,
+        RuleForm
     },
     props :{
         surveyInfo: {},
@@ -13,8 +15,10 @@ export default {
         return{
             form: {},
             questions: [],
+            rules:[],
             surveyId: null,
             tabIndex: 0,
+            tabIndexRule: 0,
         }
     },
     methods: {
@@ -51,6 +55,7 @@ export default {
             this.surveyId = this.surveyInfo.id
             this.form = this.surveyInfo
             this.questions = this.surveyInfo.questions
+            this.rules = this.surveyInfo.rules
         }
     }
 }

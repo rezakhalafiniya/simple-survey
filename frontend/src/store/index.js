@@ -6,6 +6,7 @@ import answer from './modules/answer';
 import auth from './modules/auth';
 import result from './modules/result';
 import participant from './modules/participant';
+import rule from './modules/rule';
 
 Vue.use(Vuex);
 
@@ -20,5 +21,6 @@ export default new Vuex.Store({
     answer,
     result,
     participant,
+    rule
   },
 });

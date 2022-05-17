@@ -16,6 +16,7 @@ export default {
             state.survey.description = payload.description
             state.survey.slug = payload.slug
             state.survey.questions = payload.questions
+            state.survey.rules = payload.rules
             state.survey.results = payload.results
         },
         setSurveys: (state, {payload}) => {
