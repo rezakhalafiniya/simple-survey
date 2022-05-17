@@ -49,8 +49,7 @@
                 </b-tab>
             </template>
         </b-tabs>
-
-
+        <b-btn @click.stop.prevent="toggleShowEdit">Close Edit</b-btn>
     </div>
 </template>
 <script src="./surveyForm.js"></script>

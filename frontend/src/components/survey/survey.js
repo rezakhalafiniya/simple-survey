@@ -1,16 +1,23 @@
 import {mapActions, mapGetters} from "vuex";
+import SurveyForm from "@/components/forms/survey/SurveyForm"
 
 export default {
     name: "SurveyComponent",
     data() {
         return {
             tabIndex: 0,
-            participant: {}
+            participant: {},
+            showEdit : false
         }
     },
+    components:{
+        SurveyForm
+    },
+
     computed: {
         ...mapGetters({
             survey: "survey/survey",
+            user: "auth/getUser"
         }),
     },
     mounted() {
@@ -21,6 +28,11 @@ export default {
             createResult: "result/createResult",
             updateResult: "result/updateResult",
         }),
+
+        updateShowEdit(showEdit){
+            console.log(showEdit)
+          this.showEdit = showEdit
+        },
 
         goNext() {
             if (!this.survey.questions[this.tabIndex].selectedAnswerId) {

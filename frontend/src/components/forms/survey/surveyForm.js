@@ -35,6 +35,10 @@ export default {
         },
         addQuestionComponent(){
             this.questions.push({survey_id: this.survey.id})
+        },
+        toggleShowEdit(){
+            console.log('toggle')
+            this.$emit('showEditChanged',false)
         }
     },
     computed: {
