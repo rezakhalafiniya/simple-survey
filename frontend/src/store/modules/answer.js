@@ -70,7 +70,7 @@ export default {
                 formData.append('question_id', payload.question_id)
                 formData.append('_method', 'PUT')
                 apiCaller.fetch('answer', formData, id).then(response => {
-                    if (response.status === 201) {
+                    if (response.status === 200) {
                         commit('setAnswer', {payload: response.data})
                         resolve(true)
                     } else {

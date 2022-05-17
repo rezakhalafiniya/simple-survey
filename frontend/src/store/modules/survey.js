@@ -71,7 +71,7 @@ export default {
                 formData.append('slug', payload.slug)
                 formData.append('_method', 'PUT')
                 apiCaller.fetch('survey', formData, id).then(response => {
-                    if (response.status === 201) {
+                    if (response.status === 200) {
                         commit('setSurvey', {payload: response.data})
                         resolve(response.data)
                     } else {

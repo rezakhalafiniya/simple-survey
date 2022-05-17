@@ -72,7 +72,7 @@ export default {
                 formData.append('participant_id', payload.participant_id)
                 formData.append('_method', 'PUT')
                 apiCaller.fetch('result', formData, id).then(response => {
-                    if (response.status === 201) {
+                    if (response.status === 200) {
                         commit('setResult', {payload: response.data})
                         resolve(true)
                     } else {
