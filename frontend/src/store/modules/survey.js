@@ -14,6 +14,7 @@ export default {
             state.survey.id = payload.id
             state.survey.title = payload.title
             state.survey.description = payload.description
+            state.survey.slug = payload.slug
             state.survey.questions = payload.questions
             state.survey.results = payload.results
         },

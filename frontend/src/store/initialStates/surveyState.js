@@ -4,6 +4,7 @@ const INITIAL_STATE = {
         id: null,
         title: null,
         description: null,
+        slug: null,
         questions: [],
         results: [],
     },
