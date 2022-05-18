@@ -99,11 +99,9 @@ export default {
             this.tabIndex = this.tabIndex - 1
         },
         saveResult() {
-            this.getResultTexts({surveyId:this.survey.id,participantId:this.participant.id}).then((data)=>{
-                console.log(data)
+            this.getResultTexts({surveyId:this.survey.id,participantId:this.participant.id}).then(()=>{
                 this.showResults = true
             })
-            console.log(this.survey.questions, localStorage.participant)
         }
     },
 }
