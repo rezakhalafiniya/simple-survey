@@ -39,3 +39,4 @@ Route::resources(
         'rule' => RuleController::class,
     ]
 );
+Route::get('/survey/{survey_id}/results/{participant_id}',SurveyController::class.'@getResults');

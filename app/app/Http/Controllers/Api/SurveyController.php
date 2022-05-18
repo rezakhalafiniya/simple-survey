@@ -44,6 +44,11 @@ class SurveyController extends Controller
                             ->findOrFail($id));
     }
 
+    public function getResults($survey_id,$participant_id){
+        $resutls = Survey::getResults($survey_id,$participant_id);
+        return $resutls;
+    }
+
     public function update(Request $request, $id){
 
         $validator = Validator::make($request->all(),[

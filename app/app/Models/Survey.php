@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Traits\Timestamp;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -71,11 +72,68 @@ class Survey extends Model
     /**
      * Add events for the model here
      */
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
 
-        static::deleting(function($survey) {
-             $survey->questions()->delete();
-        });
+        static::deleting(
+            function ($survey) {
+                $survey->questions()->delete();
+            }
+        );
+    }
+
+    public function scopeGetResults(Builder $query, $survey_id, $participant_id)
+    {
+        $surveyResultsForParticipant = $query->where('id', $survey_id)->with(
+            'results',
+            function ($query) use ($participant_id) {
+                return $query->where('participant_id',$participant_id)->with('answer:id,value');
+            }
+        )->with('rules')->get()->first();
+        $calculatedResult = $this->calculateResult($surveyResultsForParticipant->results);
+        $resultTextBasedOnRule = $this->getResultText($surveyResultsForParticipant->rules,$calculatedResult);
+
+        return ['result_texts' => $resultTextBasedOnRule];
+    }
+
+    protected function calculateResult($surveyResults){
+        $valueSum = 0;
+        foreach ($surveyResults as $surveyResult){
+            $valueSum = $valueSum + (int)$surveyResult->answer->value;
+        }
+        return $valueSum;
+    }
+
+    protected function getResultText($rules, $sumOfValue){
+        $resultTexts = [];
+        foreach ($rules as $rule){
+            $ruleArray = str_getcsv($rule->logic,';');
+            $operand = $ruleArray[0];
+            $value = $ruleArray[1];
+            switch ($operand){
+                case '<':
+                    if($sumOfValue < $value){
+                        $resultTexts[] = $rule->result_text;
+                    }
+                    break;
+                case '>':
+                    if($sumOfValue > $value){
+                        $resultTexts[] = $rule->result_text;
+                    }
+                    break;
+                case '<=':
+                    if($sumOfValue <= $value){
+                        $resultTexts[] = $rule->result_text;
+                    }
+                    break;
+                case '>=':
+                    if($sumOfValue >= $value){
+                        $resultTexts[] = $rule->result_text;
+                    }
+                    break;
+            }
+        }
+        return $resultTexts;
     }
 }
