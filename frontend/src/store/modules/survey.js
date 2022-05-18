@@ -7,7 +7,8 @@ export default {
 
     getters: {
         survey: state => state.survey,
-        surveys: state => state.surveys
+        surveys: state => state.surveys,
+        surveyResultTexts: state => state.survey.results
     },
     mutations: {
         setSurvey: (state, {payload}) => {
@@ -21,6 +22,9 @@ export default {
         },
         setSurveys: (state, {payload}) => {
             state.surveys = payload
+        },
+        setSurveyResults: (state, {payload}) => {
+            state.survey.results = payload.result_texts
         }
     },
     actions: {
@@ -31,7 +35,7 @@ export default {
                         commit('setSurvey', {payload: response.data})
                         resolve(true)
                     } else {
-                        reject(response?.response?.data?.error)
+                        reject(response?.response?.data)
                     }
                 })
             })
@@ -43,7 +47,7 @@ export default {
                         commit('setSurveys', {payload: response.data})
                         resolve(true)
                     } else {
-                        reject(response?.response?.data?.error)
+                        reject(response?.response?.data)
                     }
                 })
             })
@@ -59,7 +63,7 @@ export default {
                         commit('setSurvey', {payload: response.data})
                         resolve(response.data)
                     } else {
-                        reject(response?.response?.data?.error)
+                        reject(response?.response?.data)
                     }
                 })
             })
@@ -76,7 +80,19 @@ export default {
                         commit('setSurvey', {payload: response.data})
                         resolve(response.data)
                     } else {
-                        reject(response?.response?.data?.error)
+                        reject(response?.response?.data)
+                    }
+                })
+            })
+        },
+        getResultTexts: ({commit},{surveyId,participantId}) =>{
+            return new Promise((resolve, reject) => {
+                apiCaller.get(`survey/${surveyId}/results/${participantId}`).then(response => {
+                    if (response.status === 200) {
+                        commit('setSurveyResults', {payload: response.data})
+                        resolve(response.data)
+                    } else {
+                        reject(response?.response?.data)
                     }
                 })
             })
@@ -88,7 +104,7 @@ export default {
                         commit('setSurvey', {payload: INITIAL_STATE.survey})
                         resolve(true)
                     } else {
-                        reject(response?.response?.data?.error)
+                        reject(response?.response?.data)
                     }
                 })
             })

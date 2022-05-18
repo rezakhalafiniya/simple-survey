@@ -1,5 +1,6 @@
 import {mapActions, mapGetters} from "vuex";
 import SurveyForm from "@/components/forms/survey/SurveyForm"
+import ResultTexts from "@/components/resultTexts/ResultTexts"
 
 export default {
     name: "SurveyComponent",
@@ -7,11 +8,13 @@ export default {
         return {
             tabIndex: 0,
             participant: {},
-            showEdit : false
+            showEdit : false,
+            showResults: false
         }
     },
     components:{
-        SurveyForm
+        SurveyForm,
+        ResultTexts
     },
 
     computed: {
@@ -27,6 +30,7 @@ export default {
         ...mapActions({
             createResult: "result/createResult",
             updateResult: "result/updateResult",
+            getResultTexts: "survey/getResultTexts"
         }),
 
         updateShowEdit(showEdit){
@@ -90,13 +94,15 @@ export default {
                     })
                 })
             }
-
-
         },
         goBack() {
             this.tabIndex = this.tabIndex - 1
         },
         saveResult() {
+            this.getResultTexts({surveyId:this.survey.id,participantId:this.participant.id}).then((data)=>{
+                console.log(data)
+                this.showResults = true
+            })
             console.log(this.survey.questions, localStorage.participant)
         }
     },

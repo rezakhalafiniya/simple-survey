@@ -1,7 +1,7 @@
 <template>
     <div>
         <SurveyForm v-if="showEdit" :survey-info="survey" @showEditChanged="updateShowEdit"/>
-        <b-card v-if="!showEdit"  :title="survey.title" :sub-title="survey.slug">
+        <b-card v-if="!showEdit && !showResults"  :title="survey.title" :sub-title="survey.slug">
             {{survey.description}}
             <div>
                 <b-btn @click.stop.prevent="showEdit= !showEdit" v-if="user.email">Edit</b-btn>
@@ -17,7 +17,8 @@
             <b-btn @click="goBack">Back</b-btn>
             <b-btn @click="goNext">Next</b-btn>
         </b-card>
-        <b-btn @click="saveResult">submit</b-btn>
+        <ResultTexts v-if="showResults"></ResultTexts>
+        <b-btn v-if="!showResults" @click="saveResult">submit</b-btn>
     </div>
 </template>
 
