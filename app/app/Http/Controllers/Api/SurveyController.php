@@ -36,7 +36,18 @@ class SurveyController extends Controller
         return $survey;
     }
 
-    public function show($id){
+    public function show(Request $request, $id){
+        $participantId = $request->participantId;
+        if ($participantId){
+            return response(Survey::query()
+                                ->with('questions')
+                                ->with('questions.answers')
+                                ->with('questions.results', function ($query) use ($participantId){
+                                    return $query->select(['id','question_id','answer_id'])->where('participant_id',$participantId);
+                                })
+                                ->with('rules')
+                                ->findOrFail($id));
+        }
         return response(Survey::query()
                             ->with('questions')
                             ->with('questions.answers')

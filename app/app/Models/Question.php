@@ -61,6 +61,14 @@ class Question extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function results()
+    {
+        return $this->hasMany(Result::class);
+    }
+
+    /**
      * Add events for the model here
      */
     public static function boot() {
