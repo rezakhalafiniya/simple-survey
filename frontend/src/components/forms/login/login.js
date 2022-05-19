@@ -1,4 +1,5 @@
 import {mapActions, mapGetters} from "vuex";
+import customToast from "@/utils/toastMessages";
 
 export default {
     name: "Login",
@@ -20,8 +21,13 @@ export default {
             login: "auth/login",
         }),
         doLogin() {
-            console.log(this.form,this.user)
-            this.login({email: this.form.email, password: this.form.password})
+            this.login({email: this.form.email, password: this.form.password}).then(
+                () => {
+                    this.$bvModal.hide('login')
+                }
+            ).catch((e) => {
+                customToast.errors(this,e)
+            })
         },
     },
     mounted() {}

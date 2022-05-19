@@ -1,6 +1,7 @@
 import {mapActions, mapGetters} from "vuex";
 import SurveyForm from "@/components/forms/survey/SurveyForm"
 import ResultTexts from "@/components/resultTexts/ResultTexts"
+import customToast from "@/utils/toastMessages";
 
 export default {
     name: "SurveyComponent",
@@ -45,25 +46,11 @@ export default {
             if (localStorage.participant){
                 this.participant =  JSON.parse(localStorage.participant)
             }else{
-                this.$bvToast.toast(`Please create a Nickname first`, {
-                    title: 'No Participant Nickname',
-                    autoHideDelay: 5000,
-                    variant: 'danger',
-                    toaster: 'b-toaster-top-center',
-                    appendToast: false,
-                    solid: true
-                })
+                customToast.danger(this,`Please create a Nickname first`,'No Participant Nickname')
                 return
             }
             if (!this.survey.questions[this.tabIndex].selectedAnswerId) {
-                this.$bvToast.toast(`Please Answer The Question First`, {
-                    title: 'Question Not Answered',
-                    autoHideDelay: 5000,
-                    variant: 'danger',
-                    toaster: 'b-toaster-top-center',
-                    appendToast: false,
-                    solid: true
-                })
+                customToast.danger(this,`Please Answer The Question First`,'Question Not Answered')
                 return
             }
             if (this.survey.questions[this.tabIndex].resultId){
@@ -78,14 +65,7 @@ export default {
                     this.survey.questions[this.tabIndex].resultId = data.id
                     this.tabIndex = this.tabIndex + 1
                 }).catch(e => {
-                    this.$bvToast.toast(`${e.message}`, {
-                        title: 'Answer not saved',
-                        autoHideDelay: 5000,
-                        variant: 'danger',
-                        toaster: 'b-toaster-top-center',
-                        appendToast: false,
-                        solid: true
-                    })
+                    customToast.errors(this,e)
                 })
             }else{
                 this.createResult({
@@ -99,14 +79,7 @@ export default {
                     this.survey.questions[this.tabIndex].resultId = data.id
                     this.tabIndex = this.tabIndex + 1
                 }).catch(e => {
-                    this.$bvToast.toast(`${e.message}`, {
-                        title: 'Answer not saved',
-                        autoHideDelay: 5000,
-                        variant: 'danger',
-                        toaster: 'b-toaster-top-center',
-                        appendToast: false,
-                        solid: true
-                    })
+                    customToast.errors(this,e)
                 })
             }
         },

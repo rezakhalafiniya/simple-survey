@@ -30,7 +30,7 @@ export default {
                         localStorage.user = JSON.stringify(response?.data?.user)
                         resolve(true)
                     }else{
-                        reject(response?.response?.data?.error)
+                        reject(response?.response?.data)
                     }
                 })
             })
@@ -48,7 +48,7 @@ export default {
                         localStorage.user = JSON.stringify(response?.data?.user)
                         resolve(true)
                     }else{
-                        reject(response?.response?.data?.error)
+                        reject(response?.response?.data)
                     }
                 })
             })

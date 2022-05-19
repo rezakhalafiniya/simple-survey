@@ -1,4 +1,5 @@
 import {mapActions, mapGetters} from "vuex";
+import customToast from "@/utils/toastMessages";
 
 export default {
     name: "Participant",
@@ -37,27 +38,15 @@ export default {
         doCreateParticipant(){
             this.createParticipant({payload:{nickname : this.form.nickname}}).then((data)=>{
                 localStorage.participant = JSON.stringify(data)
-                this.$bvToast.toast(`Participant Created with nickname: ${data.nickname}`, {
-                    title: `Participant Created`,
-                    autoHideDelay: 5000,
-                    variant: 'success',
-                    toaster: 'b-toaster-top-center',
-                    appendToast: false,
-                    solid: true
-                })
+
+                customToast.success(this, `Participant Created with nickname: ${data.nickname}`,`Participant Created`)
+
                 this.getParticipant({id: data.id})
                 this.participant = data
                 this.$bvModal.hide('participant')
 
             }).catch((e) => {
-                this.$bvToast.toast(e.nickname, {
-                    title: `Participant was not created`,
-                    autoHideDelay: 5000,
-                    variant: 'danger',
-                    toaster: 'b-toaster-top-center',
-                    appendToast: false,
-                    solid: true
-                })
+                customToast.errors(this,e)
             })
         }
     },
