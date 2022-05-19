@@ -19,13 +19,14 @@ export default {
     },
     mounted() {
         document.title = 'Survey'
-        this.getSurvey({id: this.$route.params.slug})
         let storedParticipant = {}
         if (localStorage.participant){
             storedParticipant= JSON.parse(localStorage.participant)
+            this.getSurvey({id: this.$route.params.slug,participantId:storedParticipant.id})
         }
         if (!(storedParticipant && storedParticipant.id)){
             this.$bvModal.show('participant')
+            this.getSurvey({id: this.$route.params.slug})
         }
 
     },

@@ -17,6 +17,14 @@ export default {
             state.survey.description = payload.description
             state.survey.slug = payload.slug
             state.survey.questions = payload.questions
+            if(state.survey.questions && state.survey.questions[0] ){
+                state.survey.questions.map((q,index) => {
+                    if (payload.questions[index].results && payload.questions[index].results[0]){
+                        q.selectedAnswerId = payload.questions[index].results[0]['answer_id']
+                        q.resultId = payload.questions[index].results[0]['id']
+                    }
+                })
+            }
             state.survey.rules = payload.rules
             state.survey.results = payload.results
         },
@@ -28,9 +36,13 @@ export default {
         }
     },
     actions: {
-        getSurvey: ({commit}, {id}) => {
+        getSurvey: ({commit}, {id,participantId}) => {
             return new Promise((resolve, reject) => {
-                apiCaller.get('survey', id).then(response => {
+                let endpoint = `survey/${id}`
+                if (participantId){
+                    endpoint = endpoint + `?participantId=${participantId}`
+                }
+                apiCaller.get(endpoint).then(response => {
                     if (response.status === 200) {
                         commit('setSurvey', {payload: response.data})
                         resolve(true)
