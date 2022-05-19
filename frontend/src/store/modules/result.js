@@ -74,7 +74,7 @@ export default {
                 apiCaller.fetch('result', formData, id).then(response => {
                     if (response.status === 200) {
                         commit('setResult', {payload: response.data})
-                        resolve(true)
+                        resolve(response.data)
                     } else {
                         reject(response?.response?.data)
                     }

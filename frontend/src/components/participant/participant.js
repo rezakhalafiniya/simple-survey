@@ -9,7 +9,9 @@ export default {
         }
     },
     mounted() {
-        this.participant = JSON.parse(localStorage.participant)
+        if (localStorage.participant){
+            this.participant = JSON.parse(localStorage.participant)
+        }
     },
     computed: {
         ...mapGetters({
