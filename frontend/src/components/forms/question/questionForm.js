@@ -41,7 +41,17 @@ export default {
             this.questionId = null
         },
         addAnswerComponent() {
+            const newIndex = this.answers.length
             this.answers.push({})
+            this.$nextTick(() => {
+                this.$nextTick(()=>{
+                    this.$nextTick(()=>{
+                        requestAnimationFrame(() => {
+                            this.tabIndex = newIndex
+                        })
+                    })
+                })
+            })
         },
     },
     computed: {

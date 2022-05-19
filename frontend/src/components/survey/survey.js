@@ -24,8 +24,11 @@ export default {
         }),
     },
     mounted() {
-        this.participant = JSON.parse(localStorage.participant)
+        if (localStorage.participant){
+            this.participant = JSON.parse(localStorage.participant)
+        }
     },
+
     methods: {
         ...mapActions({
             createResult: "result/createResult",
@@ -39,7 +42,19 @@ export default {
         },
 
         goNext() {
-            this.participant =  JSON.parse(localStorage.participant)
+            if (localStorage.participant){
+                this.participant =  JSON.parse(localStorage.participant)
+            }else{
+                this.$bvToast.toast(`Please create a Nickname first`, {
+                    title: 'No Participant Nickname',
+                    autoHideDelay: 5000,
+                    variant: 'danger',
+                    toaster: 'b-toaster-top-center',
+                    appendToast: false,
+                    solid: true
+                })
+                return
+            }
             if (!this.survey.questions[this.tabIndex].selectedAnswerId) {
                 this.$bvToast.toast(`Please Answer The Question First`, {
                     title: 'Question Not Answered',

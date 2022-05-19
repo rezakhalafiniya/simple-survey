@@ -38,10 +38,30 @@ export default {
             }
         },
         addQuestionComponent(){
+            const newIndex = this.questions.length
             this.questions.push({survey_id: this.survey.id})
+            this.$nextTick(() => {
+                this.$nextTick(()=>{
+                    this.$nextTick(()=>{
+                        requestAnimationFrame(() => {
+                            this.tabIndex = newIndex
+                        })
+                    })
+                })
+            })
         },
         addRuleComponent(){
+            const newIndexRule = this.rules.length
             this.rules.push({survey_id: this.survey.id})
+            this.$nextTick(() => {
+                this.$nextTick(()=>{
+                    this.$nextTick(()=>{
+                        requestAnimationFrame(() => {
+                            this.tabIndexRule = newIndexRule
+                        })
+                    })
+                })
+            })
         },
         toggleShowEdit(){
             console.log('toggle')
