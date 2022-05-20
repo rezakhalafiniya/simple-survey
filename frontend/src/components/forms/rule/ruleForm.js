@@ -1,4 +1,5 @@
 import {mapActions, mapGetters} from "vuex";
+import customToast from "@/utils/toastMessages";
 
 export default {
     name: "RuleForm",
@@ -22,10 +23,17 @@ export default {
         saveRule(){
             this.form.survey_id = this.surveyId
             if (this.ruleId){
-                this.updateRule({payload: this.form, id: this.ruleId})
+                this.updateRule({payload: this.form, id: this.ruleId}).then(() => {
+                    customToast.success(this,'Rule Successfully Updated','Rule Updated')
+                }).catch(e => {
+                    customToast.errors(this,e)
+                })
             }else {
                 this.createRule({payload: this.form}).then((data)=>{
                     this.ruleId = data.id
+                    customToast.success(this,'Rule Successfully Saved','Rule Saved')
+                }).catch(e => {
+                    customToast.errors(this,e)
                 })
             }
         }
