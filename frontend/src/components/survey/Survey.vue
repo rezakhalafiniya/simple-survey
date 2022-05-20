@@ -9,8 +9,13 @@
             <b-tabs card v-model="tabIndex">
                 <b-tab v-for="(question,indx) in survey.questions" :key="indx" :title="'Question '+ (indx+1)" >
                     <h2>{{question.question_text}}</h2>
-                    <b-card-text v-for="(answer,indx) in question.answers" :key="indx">
-                        <b-radio :value="answer.id" v-model="question.selectedAnswerId">{{ answer.answer_text }}</b-radio>
+                    <b-card-text >
+                        <b-form-radio-group
+                            :id="question.question_text"
+                            v-model="question.selectedAnswerId"
+                            :options="radioOptions"
+                            stacked
+                        ></b-form-radio-group>
                     </b-card-text>
                 </b-tab>
             </b-tabs>

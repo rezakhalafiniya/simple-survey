@@ -23,6 +23,16 @@ export default {
             survey: "survey/survey",
             user: "auth/getUser"
         }),
+        radioOptions() {
+            if (this.tabIndex === -1 ){
+                return this.survey.questions[0].answers.map((a) => {
+                    return {value: a.id, text: a.answer_text}
+                })
+            }
+            return this.survey.questions[this.tabIndex].answers.map((a) => {
+                return {value: a.id, text: a.answer_text}
+            })
+        }
     },
     mounted() {
         if (localStorage.participant){
@@ -38,11 +48,11 @@ export default {
         }),
 
         updateShowEdit(showEdit){
-            console.log(showEdit)
           this.showEdit = showEdit
         },
 
         goNext() {
+            console.log(this.survey.questions[this.tabIndex].selectedAnswerId)
             if (localStorage.participant){
                 this.participant =  JSON.parse(localStorage.participant)
             }else{
@@ -90,6 +100,15 @@ export default {
             this.getResultTexts({surveyId:this.survey.id,participantId:this.participant.id}).then(()=>{
                 this.showResults = true
             })
-        }
+        },
+        updateRadio(){
+            console.log('clicked')
+            console.log(this.survey.questions)
+        },
+        // radioOptions(question){
+        //     return question.answers.map((a) => {
+        //         return {value: a.id, text: a.answer_text}
+        //     })
+        // }
     },
 }

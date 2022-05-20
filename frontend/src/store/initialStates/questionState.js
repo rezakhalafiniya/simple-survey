@@ -5,6 +5,7 @@ const INITIAL_STATE = {
         question_text: null,
         survey_id: null,
         answers: [],
+        selectedAnswerId: null
     },
     questions:[]
 }
