@@ -41,22 +41,37 @@
                 <b-button type="submit" variant="primary">Save</b-button>
             </b-form-group>
         </b-form>
-        <b-btn @click.stop.prevent="addQuestionComponent" v-if="surveyId">Add Question</b-btn>
-        <b-tabs card v-model="tabIndex">
-            <template v-for="(question,indx) in questions" >
-                <b-tab :key="indx" :title="'Question '+ (indx+1)" >
-                    <QuestionForm :key="indx" :surveyId="question.survey_id" :question-info="question"/>
-                </b-tab>
-            </template>
-        </b-tabs>
-        <b-btn @click.stop.prevent="addRuleComponent" v-if="surveyId">Add Rule</b-btn>
+        <b-tabs card v-model="tabIndexGeneral">
+            <b-tab title="Questions">
+                <b-tabs card v-model="tabIndex">
+                    <template v-for="(question,indx) in questions" >
+                        <b-tab :key="indx" :title="'Question '+ (indx+1)" >
+                            <QuestionForm :key="indx" :surveyId="question.survey_id" :question-info="question"/>
+                        </b-tab>
+                    </template>
+                    <b-tab @click.stop.prevent="addQuestionComponent" v-if="surveyId">
+                        <template #title>
+                            <b-icon-plus-lg></b-icon-plus-lg>
+                        </template>
+                    </b-tab>
 
-        <b-tabs card v-model="tabIndexRule">
-            <template v-for="(rule,indx) in rules" >
-                <b-tab :key="indx" :title="'Rule '+ (indx+1)" >
-                    <RuleForm :key="indx" :surveyId="rule.survey_id" :rule-info="rule"/>
-                </b-tab>
-            </template>
+                </b-tabs>
+            </b-tab>
+            <b-tab title="Rules">
+                <b-tabs card v-model="tabIndexRule">
+                    <template v-for="(rule,indx) in rules" >
+                        <b-tab :key="indx" :title="'Rule '+ (indx+1)" >
+                            <RuleForm :key="indx" :surveyId="rule.survey_id" :rule-info="rule"/>
+                        </b-tab>
+                    </template>
+
+                    <b-tab @click.stop.prevent="addRuleComponent" v-if="surveyId">
+                        <template #title>
+                            <b-icon-plus-lg></b-icon-plus-lg>
+                        </template>
+                    </b-tab>
+                </b-tabs>
+            </b-tab>
         </b-tabs>
         <b-btn @click.stop.prevent="toggleShowEdit">Close Edit</b-btn>
     </div>

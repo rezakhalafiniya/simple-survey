@@ -23,7 +23,7 @@
             <b-btn @click="goNext">Next</b-btn>
         </b-card>
         <ResultTexts v-if="showResults"></ResultTexts>
-        <b-btn v-if="!showResults" @click="saveResult">submit</b-btn>
+        <b-btn v-if="!showResults && !showEdit" @click="saveResult">submit</b-btn>
     </div>
 </template>
 

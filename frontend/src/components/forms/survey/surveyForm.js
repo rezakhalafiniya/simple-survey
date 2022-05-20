@@ -20,6 +20,7 @@ export default {
             surveyId: null,
             tabIndex: 0,
             tabIndexRule: 0,
+            tabIndexGeneral: 0,
         }
     },
     methods: {
