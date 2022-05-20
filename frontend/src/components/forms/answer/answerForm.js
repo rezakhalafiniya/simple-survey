@@ -1,4 +1,5 @@
 import {mapActions, mapGetters} from "vuex";
+import customToast from "@/utils/toastMessages";
 
 export default {
     name: "AnswerForm",
@@ -22,10 +23,17 @@ export default {
         saveAnswer(){
             this.form.question_id = this.questionId
             if (this.answerId){
-                this.updateAnswer({payload: this.form, id: this.answerId})
+                this.updateAnswer({payload: this.form, id: this.answerId}).then(() => {
+                    customToast.success(this,'Answer Successfully Updated','Answer Updated')
+                }).catch(e => {
+                    customToast.errors(this,e)
+                })
             }else {
-                this.createAnswer({payload: this.form}).then((data)=>{
+                this.createAnswer({payload: this.form}).then((data) => {
                     this.answerId = data.id
+                    customToast.success(this,'Answer Successfully Saved','Answer Saved')
+                }).catch(e => {
+                    customToast.errors(this,e)
                 })
             }
         }

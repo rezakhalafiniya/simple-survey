@@ -1,6 +1,7 @@
 import QuestionForm from "@/components/forms/question/QuestionForm"
 import RuleForm from "@/components/forms/rule/RuleForm"
 import {mapActions, mapGetters} from "vuex";
+import customToast from "@/utils/toastMessages";
 
 export default {
     name: "surveyForm",
@@ -30,10 +31,16 @@ export default {
             if (this.surveyId){
                 this.updateSurvey({payload: this.form, id: this.surveyId}).then((data) => {
                     this.surveyId = data.id
+                    customToast.success(this,'Survey Successfully Updated','Survey Updated')
+                }).catch(e => {
+                    customToast.errors(this,e)
                 })
             }else{
-                this.createSurvey({payload: this.form}).then((data) => {
+                this.createSurvey({payload: this.form}).then((data) =>{
                     this.surveyId = data.id
+                    customToast.success(this,'Survey Successfully Saved','Survey Saved')
+                }).catch(e => {
+                    customToast.errors(this,e)
                 })
             }
         },
