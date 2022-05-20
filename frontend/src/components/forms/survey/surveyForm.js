@@ -74,6 +74,21 @@ export default {
         toggleShowEdit(){
             console.log('toggle')
             this.$emit('showEditChanged',false)
+        },
+        questionDeleted(indx) {
+            for (let i = 0; i < this.questions.length; i++) {
+                if (i === indx) {
+                    this.questions.splice(i, 1)
+                }
+            }
+            if (this.tabIndex === 0){
+                this.tabIndex ++
+            }else{
+                this.tabIndex --
+            }
+        },
+        questionAdded(answer){
+            this.questions[answer.key]= answer.data
         }
     },
     computed: {

@@ -28,7 +28,8 @@ export default {
         saveQuestion() {
             this.form.survey_id = this.surveyId
             if (this.questionId){
-                this.updateQuestion({payload: this.form, id: this.questionId}).then(() => {
+                this.updateQuestion({payload: this.form, id: this.questionId}).then((data) => {
+                    this.$emit('questionAdded',{data:data, key:this.$vnode.key})
                     customToast.success(this,'Question Successfully Updated','Question Updated')
                 }).catch(e => {
                     customToast.errors(this,e)
@@ -36,6 +37,7 @@ export default {
             }else{
                 this.createQuestion({payload: this.form}).then((data)=>{
                     this.questionId = data.id
+                    this.$emit('questionAdded',{data:data, key:this.$vnode.key})
                     customToast.success(this,'Question Successfully Saved','Question Saved')
                 }).catch(e => {
                     customToast.errors(this,e)
@@ -44,8 +46,8 @@ export default {
 
         },
         doDelete(){
-            this.form.question_text = ''
             this.deleteQuestion({id: this.questionId})
+            this.$emit('questionDeleted',this.questionId)
             this.questionId = null
         },
         addAnswerComponent() {
@@ -61,6 +63,26 @@ export default {
                 })
             })
         },
+        answerDeleted(indx) {
+
+            console.log(indx)
+            for (let i = 0; i < this.answers.length; i++) {
+                if (i === indx) {
+                    this.answers.splice(i, 1)
+                }
+            }
+            if (this.tabIndex === 0){
+                this.tabIndex ++
+            }else{
+                this.tabIndex --
+            }
+        },
+        answerAdded(answer){
+            console.log(answer,this.answers)
+            this.answers[answer.key]= answer.data
+            // this.questionInfo.answers.push(answer)
+            // this.answers.push(answer)
+        }
     },
     computed: {
         ...mapGetters({

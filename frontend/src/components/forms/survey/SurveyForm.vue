@@ -45,8 +45,8 @@
             <b-tab title="Questions">
                 <b-tabs card v-model="tabIndex">
                     <template v-for="(question,indx) in questions" >
-                        <b-tab :key="indx" :title="'Question '+ (indx+1)" >
-                            <QuestionForm :key="indx" :surveyId="question.survey_id" :question-info="question"/>
+                        <b-tab :key="indx" :title="'Question '+ (indx+1)" lazy>
+                            <QuestionForm :key="indx" :surveyId="question.survey_id" :question-info="question" @questionAdded="questionAdded" @questionDeleted="questionDeleted(indx)"/>
                         </b-tab>
                     </template>
                     <b-tab @click.stop.prevent="addQuestionComponent" v-if="surveyId">

@@ -27,6 +27,7 @@
             </b-form-group>
             <b-form-group>
                 <b-button type="submit" variant="primary">Save</b-button>
+                <b-button @click.prevent.stop="doDelete" variant="danger" v-if="answerId">Delete</b-button>
             </b-form-group>
         </b-form>
     </div>

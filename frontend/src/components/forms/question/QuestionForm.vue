@@ -15,18 +15,22 @@
             </b-form-group>
             <b-form-group>
                 <b-button type="submit" variant="primary">Save</b-button>
-                <b-button @click.prevent.stop="doDelete" variant="danger">Delete</b-button>
+                <b-button @click.prevent.stop="doDelete" variant="danger" v-if="questionId">Delete</b-button>
             </b-form-group>
-            <b-tabs card v-model="tabIndex">
-                <template v-for="(answer,indx) in answers">
-                    <b-tab :key="indx" :title="'Answer '+ (indx+1)">
-                        <AnswerForm :key="indx" :questionId="questionId" :answer-info="answer"/>
-                    </b-tab>
-                </template>
-                <b-tab @click.stop.prevent="addAnswerComponent" v-if="questionId">
-                    <template #title>
-                        <b-icon-plus-lg></b-icon-plus-lg>
-                    </template>
+            <b-tabs>
+                <b-tab title="Answers">
+                    <b-tabs card v-model="tabIndex">
+                        <template v-for="(answer,indx) in answers">
+                            <b-tab :key="indx" :title="'Answer '+ (indx+1)" lazy>
+                                <AnswerForm :key="indx" :questionId="questionId" :answer-info="answer" @answerAdded="answerAdded" @answerDeleted="answerDeleted(indx)"/>
+                            </b-tab>
+                        </template>
+                        <b-tab @click.stop.prevent="addAnswerComponent" v-if="questionId">
+                            <template #title>
+                                <b-icon-plus-lg></b-icon-plus-lg>
+                            </template>
+                        </b-tab>
+                    </b-tabs>
                 </b-tab>
             </b-tabs>
         </b-form>

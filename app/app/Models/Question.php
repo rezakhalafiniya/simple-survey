@@ -75,6 +75,7 @@ class Question extends Model
         parent::boot();
 
         static::deleting(function($question) {
+            $question->results()->delete();
             $question->answers()->delete();
         });
     }

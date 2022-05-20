@@ -78,9 +78,19 @@ class Survey extends Model
 
         static::deleting(
             function ($survey) {
+                $survey->results()->delete();
+                $survey->answers()->delete();
                 $survey->questions()->delete();
+
             }
         );
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function answers(){
+        return $this->hasManyThrough(Answer::class,Question::class);
     }
 
     public function scopeGetResults(Builder $query, $survey_id, $participant_id)
