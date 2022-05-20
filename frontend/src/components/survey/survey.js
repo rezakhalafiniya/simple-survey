@@ -29,6 +29,9 @@ export default {
                     return {value: a.id, text: a.answer_text}
                 })
             }
+            if (!this.survey.questions[this.tabIndex]  ){
+                return
+            }
             return this.survey.questions[this.tabIndex].answers.map((a) => {
                 return {value: a.id, text: a.answer_text}
             })
@@ -52,7 +55,6 @@ export default {
         },
 
         goNext() {
-            console.log(this.survey.questions[this.tabIndex].selectedAnswerId)
             if (localStorage.participant){
                 this.participant =  JSON.parse(localStorage.participant)
             }else{
