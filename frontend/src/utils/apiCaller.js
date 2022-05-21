@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const apiUrl = 'http://localhost:888/api/'
+const apiUrl = process.env.VUE_APP_BE_URL
 
 const apiCaller = {
     fetch: async (endpoint, formdata, id) => {
