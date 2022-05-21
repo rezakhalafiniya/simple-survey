@@ -25,7 +25,9 @@
                     required
                     aria-describedby="rule-logic-input-help-block"
                 ></b-form-input>
-                <b-form-text id="rule-logic-input-help-block">The format of the logic: Operator;startValue;endValue (operator and value are seperated by semicolon.) <br/>Example: &lt;;25 . This means that this rule text will be shown if the sum of the answered values are smaller than 25.
+                <b-form-text id="rule-logic-input-help-block">The format of the logic: Operator;startValue;endValue(only for &gt;==&lt;) (operator and value are seperated by semicolon.)
+                    <br/>Example 1: &lt;;25 . This means that this rule text will be shown if the sum of the answered values are smaller than 25.
+                    <br/>Example 2: &gt;==&lt;;25;60 . This means that this rule text will be shown if the sum of the answered values is bigger or equal than 25 and smaller or equal than 60.
                     <br/>Possible Operator: = , &lt; , &gt; , &lt;= , &gt;= , &gt;==&lt; </b-form-text>
             </b-form-group>
             <b-form-group>
