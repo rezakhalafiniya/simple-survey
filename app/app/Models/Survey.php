@@ -119,29 +119,47 @@ class Survey extends Model
         $resultTexts = [];
         foreach ($rules as $rule){
             $ruleArray = str_getcsv($rule->logic,';');
-            $operand = $ruleArray[0];
-            $value = $ruleArray[1];
+            if (count($ruleArray) >= 2){
+                $operand = $ruleArray[0];
+                $startValue = $ruleArray[1];
+            }else{
+                continue;
+            }
+            if (count($ruleArray) > 2){
+                $endValue = $ruleArray[2];
+            }
             switch ($operand){
                 case '<':
-                    if($sumOfValue < $value){
+                    if($sumOfValue < $startValue){
+                        $resultTexts[] = $rule->result_text;
+                    }
+                    break;
+                case '=':
+                    if($sumOfValue == $startValue){
                         $resultTexts[] = $rule->result_text;
                     }
                     break;
                 case '>':
-                    if($sumOfValue > $value){
+                    if($sumOfValue > $startValue){
                         $resultTexts[] = $rule->result_text;
                     }
                     break;
                 case '<=':
-                    if($sumOfValue <= $value){
+                    if($sumOfValue <= $startValue){
                         $resultTexts[] = $rule->result_text;
                     }
                     break;
                 case '>=':
-                    if($sumOfValue >= $value){
+                    if($sumOfValue >= $startValue){
                         $resultTexts[] = $rule->result_text;
                     }
                     break;
+                case '>==<':
+                    if($sumOfValue >= $startValue && $sumOfValue <= $endValue){
+                        $resultTexts[] = $rule->result_text;
+                    }
+                    break;
+
             }
         }
         return $resultTexts;
