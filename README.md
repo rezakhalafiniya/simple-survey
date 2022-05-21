@@ -1,4 +1,4 @@
-#About
+# About
 
 THis is a simple surveying tool, built with VueJs and PHP/Laravel. 
 
@@ -6,12 +6,12 @@ After registration, you will be logged in, and then you can create a survey.
 
 If you are just a visitor you can choose a nickname and take part in the existing surveys.
 
-#Demo
+# Demo
 [Simple Survey example site](https://simplesurvey.rkis.me)
 
 ---
 
-#Creating Survey
+# Creating Survey
 ## Survey:
 First create a survey by clicking on "Add New Survey" in the top menu.
 Each survey should have a title, description and a unique slug.
@@ -23,22 +23,22 @@ Give the desired question and click save. After save you can add the possible an
 Create your answers after the question is saved by giving the answer text and the value for that answer.
 The results of the survey will be calculated based on the value of the selected answers.
 
-###Rules:
+### Rules:
 Each survey can have several rules, and none or several rules can be shown after the survey is submited by participant.
-####Rule Text
+#### Rule Text
 This Text will be shown to the participant after survey submission, if the logic is met.
-####Rule Logic
+#### Rule Logic
 The format of the logic: Operator;value (operator and value are seperated by semicolon.) <br/>Example: &lt;;25 . This means that this rule text will be shown if the sum of the answered values are smaller than 25.
 <br/>Possible Operator: &lt; , &gt; , &lt;= , &gt;=
 
 
 ---
-#Development
+# Development
 ## Requirements:
 - Docker and Docker-compose
 - NodeJs, npm or yarn, vue-cli-service (For frontend development)
 
-##Setup
+## Setup
 - Clone the repository and go to the repository folder.
 - Copy the .env.dist to .env file : ``cp .env.dist .env``
 - Run the docker-compose with : ``docker-compose up``
