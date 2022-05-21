@@ -23,7 +23,10 @@
                     id="rule-logic-input"
                     v-model="form.logic"
                     required
+                    aria-describedby="rule-logic-input-help-block"
                 ></b-form-input>
+                <b-form-text id="rule-logic-input-help-block">The format of the logic: Operator;value (operator and value are seperated by semicolon.) <br/>Example: &lt;;25 . This means that this rule text will be shown if the sum of the answered values are smaller than 25.
+                    <br/>Possible Operator: &lt; , &gt; , &lt;= , &gt;=</b-form-text>
             </b-form-group>
             <b-form-group>
                 <b-button type="submit" variant="primary">Save</b-button>
