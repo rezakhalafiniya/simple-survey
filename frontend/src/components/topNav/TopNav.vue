@@ -11,12 +11,6 @@
 
                 <!-- Right aligned nav items -->
                 <b-navbar-nav class="ml-auto">
-
-                    <b-nav-item>
-                        <b-nav>
-                            <router-link :to="{name:'About'}">About</router-link>
-                        </b-nav>
-                    </b-nav-item>
                     <b-nav-item v-if="user.email">
                         <b-nav>
                             <router-link :to="{name:'NewSurvey'}">Add New Survey</router-link>
